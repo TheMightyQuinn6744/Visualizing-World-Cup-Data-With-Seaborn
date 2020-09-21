@@ -1,0 +1,56 @@
+#import project dependent modules
+import codecademylib3_seaborn
+from matplotlib import pyplot as plt
+import pandas as pd
+import seaborn as sns
+
+#load WorldCupMatches.csv into a DataFrame
+df = pd.read_csv('WorldCupMatches.csv')
+# print(df.head())
+
+#Create a column in df named Total Goals which is equal to home goals + away goals
+df['Total Goals'] = df['Home Team Goals'] + df['Away Team Goals']
+# print(df.head())
+
+#set bar chart style to whitegrid
+sns.set_style("whitegrid")
+#set bar chart context to poster
+sns.set_context("poster")
+
+#set the figure to be 17 inches wide, 10 inches tall
+f, ax = plt.subplots(figsize=(17,10))
+
+#Bar chart visualizing goals scored each year between 1930-2014
+ax = sns.barplot(
+  data=df,
+  x ="Year",
+  y="Total Goals",
+)
+
+#set x-axis title for bar chart 
+ax.set_title('Total Goals Scored By Year During World Cup')
+#display Bar chart
+# plt.show()
+
+
+#load goals.csv into a DataFrame
+df_goals = pd.read_csv('goals.csv')
+# print(df_goals.head())
+
+#set box plot context to notebook & font scale to 1.25
+sns.set_context("notebook", font_scale=1.25)
+
+#set the figure for box plot to be 17 inches wide, 10 inches tall
+f, ax2 = plt.subplots(figsize=(14,10))
+
+#Box plot visualizing goals scored each year between 1930-2014
+ax2 = sns.boxplot(
+  data=df_goals,
+  x="year",
+  y="goals"
+)
+
+#set x-axis title for box plot
+ax2.set_title('Distribution of Goals')
+#display box plot
+plt.show()
